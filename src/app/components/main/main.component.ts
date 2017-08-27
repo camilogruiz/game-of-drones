@@ -10,8 +10,8 @@ import { PlayService } from '../../services/play.service';
 })
 export class MainComponent implements OnInit {
 
-  private player1: string;
-  private player2: string;
+  private player1: string = null;
+  private player2: string = null;
 
   constructor(
     private router: Router,
@@ -23,7 +23,8 @@ export class MainComponent implements OnInit {
 
   startGame() {
     // TODO: Validaciones
-    if (this.player1 === '' || this.player2 === '') {
+    // tslint:disable-next-line:quotemark
+    if (this.player1 === null || this.player2 === null || this.player1.trim() === "" || this.player2.trim() === "") {
       return;
     }
     this.playService.user1.name = this.player1;
