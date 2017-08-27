@@ -3,6 +3,31 @@ const express = require('express');
 const router = express.Router();
 const ObjectID = mongodb.ObjectID;
 
+router.get('/main', function(req, res) {
+  res.redirect('/');
+});
+
+router.get('/game', function(req, res) {
+  res.redirect('/');
+});
+
+router.get('/config', function(req, res) {
+  res.redirect('/');
+});
+
+router.get('/ranking', function(req, res) {
+  res.redirect('/');
+});
+
+router.get('/win', function(req, res) {
+  res.redirect('/');
+});
+
+router.get('/about', function(req, res) {
+  res.redirect('/');
+});
+
+
 /**
  * API
  * USERS
