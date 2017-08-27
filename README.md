@@ -5,11 +5,8 @@ Paper, rock and scissors... and more!
 ## Collection and References
 
 |users|
-
 |games|
-
 |rounds|
-
 |moves|
 
 ## Run app
