@@ -14,8 +14,7 @@
     "build": "ng build && gulp",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "ng build && gulp"
+    "e2e": "ng e2e"
   },
   "private": true,
   "homepage": "https://hcamilogruiz.github.io/game-of-drones",
