@@ -79,7 +79,7 @@ export class ConfigurationComponent implements OnInit {
       const idx = this.getIndexOfMove(objId);
       if (idx !== -1) {
         this.lstMoves.splice(idx, 1);
-        this.selectMove(null, true);
+        this.initMove();
       }
     });
   }
