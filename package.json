@@ -4,13 +4,15 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng build && gulp && node server.js",
+    "start": "node server.js",
+    "dev": "ng build && gulp && node server.js",
     "build": "ng build && gulp",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
+  "homepage": "https://hcamilogruiz.github.io/game-of-drones",
   "dependencies": {
     "@angular/animations": "^4.2.4",
     "@angular/common": "^4.2.4",
