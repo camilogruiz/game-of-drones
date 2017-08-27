@@ -2,7 +2,7 @@
 
 Paper, rock and scissors... and more!
 
-##Collection and Reference
+## Collection and References
 
 |users|
 |games|
