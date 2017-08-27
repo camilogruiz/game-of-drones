@@ -1,11 +1,11 @@
 {
   "name": "game-of-drones",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng build && gulp && node server.js",
+    "build": "ng build && gulp",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -21,7 +21,13 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "angular2-materialize": "^15.1.9",
+    "body-parser": "^1.17.2",
     "core-js": "^2.4.1",
+    "dotenv": "4.0.0",
+    "express": "^4.15.4",
+    "materialize-css": "^0.100.1",
+    "mongodb": "^2.2.31",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },
@@ -33,6 +39,9 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
     "codelyzer": "~3.1.1",
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",
