@@ -2,6 +2,7 @@ const mongodb = require('mongodb');
 const express = require('express');
 const router = express.Router();
 const ObjectID = mongodb.ObjectID;
+const promisify = require('es6-promisify');
 
 router.get('/main', function (req, res) {
   res.redirect('/');
@@ -27,69 +28,10 @@ router.get('/about', function (req, res) {
   res.redirect('/');
 });
 
-
 /**
  * API
  * USERS
  */
-
-/** GetAll */
-router.get("/api/users", function (req, res) {
-  userCollection.find({}).toArray(function (err, data) {
-    if (err)
-      handleError(res, err.message, "Failed get users");
-    else
-      res.status(200).json(data);
-  });
-});
-/** Insert */
-router.post("/api/users", function (req, res) {
-  var newData = req.body;
-
-  if (!req.body.name)
-    handleError(res, "Invalid user input", "Must provide a name");
-
-  userCollection.insertOne(newData, function (err, data) {
-    if (err)
-      handleError(res, err.message, "Failed to create new user");
-    else
-      res.status(201).json(data.ops[0]);
-  });
-});
-/** GetById */
-router.get("/api/users/:id", function (req, res) {
-  userCollection.findOne({ _id: new ObjectID(req.params.id) }, function (err, data) {
-    if (err)
-      handleError(res, err.message, "Failed to get user");
-    else
-      res.status(200).json(data);
-  });
-});
-
-/** Update */
-router.put("/api/users/:id", function (req, res) {
-  var updateData = req.body;
-  delete updateData._id;
-
-  userCollection.updateOne({ _id: new ObjectID(req.params.id) }, updateData, function (err, data) {
-    if (err) {
-      handleError(res, err.message, "Failed to update user");
-    } else {
-      updateData._id = req.params.id;
-      res.status(200).json(updateData);
-    }
-  });
-});
-
-/** Delete */
-router.delete("/api/users/:id", function (req, res) {
-  userCollection.deleteOne({ _id: new ObjectID(req.params.id) }, function (err, data) {
-    if (err)
-      handleError(res, err.message, "Failed to delete user");
-    else
-      res.status(200).json(req.params.id);
-  });
-});
 
 /**
  * GAME
@@ -107,50 +49,31 @@ router.get("/api/games", function (req, res) {
 /** Insert */
 router.post("/api/games", function (req, res) {
   var newData = req.body;
-  newData.userID1 = new ObjectID(req.body.userID1);
-  newData.userID2 = new ObjectID(req.body.userID2);
-  newData.createdDate = new Date();
-
-  gameCollection.insertOne(newData, function (err, data) {
-    if (err)
-      handleError(res, err.message, "Failed to create new game");
+  userCollection.insertOne(newData.user1, function (err, dUser1) {
+    if (err) { handleError(res, err.message, "Failed insert game"); }
     else
-      res.status(201).json(data.ops[0]);
+      newData.game.userID1 = dUser1.ops[0]._id;
+    userCollection.insertOne(newData.user2, function (err, dUser2) {
+      if (err) {
+        handleError(res, err.message, "Failed insert game");
+      }
+      else {
+        newData.game.userID2 = dUser2.ops[0]._id;
+        newData.game.createdDate = new Date();
+        gameCollection.insertOne(newData.game, function (err, dGame) {
+          if (err) {
+            handleError(res, err.message, "Failed insert game");
+          }
+          else {
+            roundCollection.insertMany(newData.scores, function (err, dScore) {
+              res.status(201).json(true);
+            });
+          }
+        });
+      }
+    });
   });
-});
-/** GetById */
-router.get("/api/games/:id", function (req, res) {
-  gameCollection.findOne({ _id: new ObjectID(req.params.id) }, function (err, data) {
-    if (err)
-      handleError(res, err.message, "Failed to get game");
-    else
-      res.status(200).json(data);
-  });
-});
 
-/** Update */
-router.put("/api/games/:id", function (req, res) {
-  var updateData = req.body;
-  delete updateData._id;
-
-  gameCollection.updateOne({ _id: new ObjectID(req.params.id) }, updateData, function (err, data) {
-    if (err) {
-      handleError(res, err.message, "Failed to update game");
-    } else {
-      updateData._id = req.params.id;
-      res.status(200).json(updateData);
-    }
-  });
-});
-
-/** Delete */
-router.delete("/api/games/:id", function (req, res) {
-  gameCollection.deleteOne({ _id: new ObjectID(req.params.id) }, function (err, data) {
-    if (err)
-      handleError(res, err.message, "Failed to delete game");
-    else
-      res.status(200).json(req.params.id);
-  });
 });
 
 /**
@@ -221,65 +144,6 @@ router.delete("/api/moves/:id", function (req, res) {
 /**
  * ROUND
  */
-
-/** GetAll */
-router.get("/api/rounds", function (req, res) {
-  roundCollection.find({}).toArray(function (err, data) {
-    if (err)
-      handleError(res, err.message, "Failed get rounds");
-    else
-      res.status(200).json(data);
-  });
-});
-/** Insert */
-router.post("/api/rounds", function (req, res) {
-  var newData = req.body;
-
-  if (!req.body.move)
-    handleError(res, "Invalid round input", "Must provide a round");
-
-
-  roundCollection.insertOne(newData, function (err, data) {
-    if (err)
-      handleError(res, err.message, "Failed to create new round");
-    else
-      res.status(201).json(data.ops[0]);
-  });
-});
-/** GetById */
-router.get("/api/rounds/:id", function (req, res) {
-  roundCollection.findOne({ _id: new ObjectID(req.params.id) }, function (err, data) {
-    if (err)
-      handleError(res, err.message, "Failed to get round");
-    else
-      res.status(200).json(data);
-  });
-});
-
-/** Update */
-router.put("/api/rounds/:id", function (req, res) {
-  var updateData = req.body;
-  delete updateData._id;
-
-  roundCollection.updateOne({ _id: new ObjectID(req.params.id) }, updateData, function (err, data) {
-    if (err) {
-      handleError(res, err.message, "Failed to update round");
-    } else {
-      updateData._id = req.params.id;
-      res.status(200).json(updateData);
-    }
-  });
-});
-
-/** Delete */
-router.delete("/api/rounds/:id", function (req, res) {
-  roundCollection.deleteOne({ _id: new ObjectID(req.params.id) }, function (err, data) {
-    if (err)
-      handleError(res, err.message, "Failed to delete round");
-    else
-      res.status(200).json(req.params.id);
-  });
-});
 
 /** GetAll */
 router.get("/api/groups", function (req, res) {

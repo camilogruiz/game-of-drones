@@ -14,14 +14,6 @@ export class RoundService {
     public errorHandlersService: ErrorHandlersService
   ) { }
 
-  // post("/api/rounds")
-  createRound(newRound: Round): Promise<void | Round> {
-    return this.http.post(this.roundsUrl, newRound)
-      .toPromise()
-      .then(response => response.json() as Round)
-      .catch(this.errorHandlersService.handleError);
-  }
-
     // get("/api/groups)
     getGroupRound(): Promise<void | Round[]> {
       return this.http.get('/api/groups')
@@ -29,5 +21,4 @@ export class RoundService {
         .then(response => response.json() as Round[])
         .catch(this.errorHandlersService.handleError);
     }
-
 }

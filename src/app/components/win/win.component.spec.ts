@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { PlayService } from '../../services/play.service';
 import { WinComponent } from './win.component';
 
 describe('WinComponent', () => {
@@ -8,7 +8,8 @@ describe('WinComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WinComponent ]
+      declarations: [ WinComponent ],
+      providers: [ PlayService ]
     })
     .compileComponents();
   }));

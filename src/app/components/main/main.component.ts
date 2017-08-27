@@ -38,21 +38,12 @@ export class MainComponent implements OnInit {
   }
 
   private startGame() {
-    // TODO: Validaciones
     // tslint:disable-next-line:quotemark
     if (this.player1 === null || this.player2 === null || this.player1.trim() === "" || this.player2.trim() === "") {
-      this.openModal();
       return;
     }
     this.playService.objPlay.user1.name = this.player1;
     this.playService.objPlay.user2.name = this.player2;
     this.router.navigate(['/game']);
-  }
-
-  private openModal() {
-    this.modalActions.emit({ action: 'modal', params: ['open'] });
-  }
-  private closeModal() {
-    this.modalActions.emit({ action: 'modal', params: ['close'] });
   }
 }

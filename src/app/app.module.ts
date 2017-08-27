@@ -14,7 +14,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { RankingComponent } from './components/ranking/ranking.component';
 /** SERVICES */
 import { GameService } from './services/game.service';
-import { UserService } from './services/user.service';
 import { MoveService } from './services/move.service';
 import { RoundService } from './services/round.service';
 import { PlayService } from './services/play.service';
@@ -43,7 +42,6 @@ import { WinComponent } from './components/win/win.component';
   ],
   providers: [
     GameService,
-    UserService,
     MoveService,
     RoundService,
     PlayService,

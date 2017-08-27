@@ -1,6 +1,7 @@
 import { Move } from './move';
 import { User } from './user';
 import { Round } from './round';
+import { Game } from './game';
 
 export class Play {
   scores: Round[] = [];
@@ -11,4 +12,5 @@ export class Play {
   moves: Move[] = [];
   winner: string;
   count = 1;
+  game: Game = new Game();
 }

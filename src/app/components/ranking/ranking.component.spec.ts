@@ -1,4 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpModule } from '@angular/http';
+import { RoundService } from '../../services/round.service';
+import { ErrorHandlersService } from '../../handlers/error-handlers.service';
 
 import { RankingComponent } from './ranking.component';
 
@@ -8,9 +11,11 @@ describe('RankingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RankingComponent ]
+      imports: [HttpModule],
+      declarations: [RankingComponent],
+      providers: [RoundService, ErrorHandlersService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

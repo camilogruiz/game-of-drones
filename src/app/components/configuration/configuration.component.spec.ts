@@ -5,7 +5,6 @@ import { ConfigurationComponent } from './configuration.component';
 import { MoveService } from '../../services/move.service';
 import { ErrorHandlersService } from '../../handlers/error-handlers.service';
 
-
 describe('ConfigurationComponent', () => {
   let component: ConfigurationComponent;
   let fixture: ComponentFixture<ConfigurationComponent>;
