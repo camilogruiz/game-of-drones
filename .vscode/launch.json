@@ -12,6 +12,7 @@
       "outFiles": [
         "${workspaceRoot}/out/**/*.js"
       ]
+
     }
   ]
 }

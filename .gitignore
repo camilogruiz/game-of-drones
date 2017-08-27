@@ -43,3 +43,4 @@ yarn-error.log
 Thumbs.db
 
 variables.env
+.vscode/launch.json
