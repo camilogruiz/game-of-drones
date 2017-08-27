@@ -3,27 +3,27 @@ const express = require('express');
 const router = express.Router();
 const ObjectID = mongodb.ObjectID;
 
-router.get('/main', function(req, res) {
+router.get('/main', function (req, res) {
   res.redirect('/');
 });
 
-router.get('/game', function(req, res) {
+router.get('/game', function (req, res) {
   res.redirect('/');
 });
 
-router.get('/config', function(req, res) {
+router.get('/config', function (req, res) {
   res.redirect('/');
 });
 
-router.get('/ranking', function(req, res) {
+router.get('/ranking', function (req, res) {
   res.redirect('/');
 });
 
-router.get('/win', function(req, res) {
+router.get('/win', function (req, res) {
   res.redirect('/');
 });
 
-router.get('/about', function(req, res) {
+router.get('/about', function (req, res) {
   res.redirect('/');
 });
 
@@ -284,10 +284,8 @@ router.delete("/api/rounds/:id", function (req, res) {
 /** GetAll */
 router.get("/api/groups", function (req, res) {
   roundCollection.aggregate(
-    {
-      $group:
-      { _id: '$winUser.name', total: { $sum: 1 } }
-    },
+    { $group: { _id: '$winUser.name', total: { $sum: 1 } } },
+    { $sort: { total: -1 } },
     function (err, data) {
       if (err)
         handleError(res, err.message, "Failed get rounds");

@@ -18,12 +18,6 @@ export class GameComponent implements OnInit {
   ngOnInit() {
     this.playService.currentUser = null;
     this.playService.count = 1;
-
-    this.moveService
-    .getMoves()
-    .then((moves: Move[]) => {
-      this.playService.moves = moves;
-    });
   }
 
 }

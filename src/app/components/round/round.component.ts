@@ -10,14 +10,19 @@ import { MoveService } from '../../services/move.service';
   styleUrls: ['./round.component.css']
 })
 export class RoundComponent implements OnInit {
-  @Input() lstMoves: Move[] = [];
   private move: any;
 
   constructor(
     private router: Router,
     public playService: PlayService,
     private moveService: MoveService
-  ) { }
+  ) {
+    this.moveService
+      .getMoves()
+      .then((moves: Move[]) => {
+        this.playService.moves = moves;
+      });
+  }
 
   ngOnInit() {
     this.playService.nextRound();
