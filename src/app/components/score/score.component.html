@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let score of playService.scores">
+          <tr *ngFor="let score of playService.objPlay.scores">
             <td>{{score.name}}</td>
             <td>{{score.winUser === null ? 'tie' : score.winUser.name}}</td>
           </tr>

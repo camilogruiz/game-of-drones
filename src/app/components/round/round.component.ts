@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Move } from '../../models/move';
 import { PlayService } from '../../services/play.service';
 import { MoveService } from '../../services/move.service';
+import { GameService } from '../../services/game.service';
 
 @Component({
   selector: 'app-round',
@@ -15,28 +16,24 @@ export class RoundComponent implements OnInit {
   constructor(
     private router: Router,
     public playService: PlayService,
-    private moveService: MoveService
-  ) {
-    this.moveService
-      .getMoves()
-      .then((moves: Move[]) => {
-        this.playService.moves = moves;
-      });
-  }
+    private moveService: MoveService,
+    private gameService: GameService
+  ) { }
 
   ngOnInit() {
     this.playService.nextRound();
   }
 
   play(move: Move) {
-    const m = this.playService.moves.filter(item => {
+    const m = this.playService.objPlay.moves.filter(item => {
       return item._id === this.move;
     })[0];
-    this.playService.nextMove(m).then(respose => {
-      if (respose) {
+    const respose = this.playService.nextMove(m);
+    if (respose) {
+      this.gameService.save().then((rta) => {
         this.router.navigate(['/win']);
-      }
-    });
+      });
+    }
 
     this.move = '';
   }

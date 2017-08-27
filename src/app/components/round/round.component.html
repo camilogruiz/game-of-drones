@@ -1,25 +1,25 @@
 <div class="container">
   <div class="row">
     <div class="col s12 center-align">
-      <h1>{{playService.titleRound}}</h1>
+      <h1>{{playService.objPlay.titleRound}}</h1>
     </div>
   </div>
   <div class="row">
     <div class="col s12 center-align">
-      <h2>{{playService.currentUser}}</h2>
+      <h2>{{playService.objPlay.currentUser}}</h2>
     </div>
   </div>
   <div class="row">
     <div class="col s12">
       <select materialize="material_select" [(ngModel)]="move">
           <option value="" disabled selected>Choose your option</option>
-          <option *ngFor="let m of lstMoves" [ngValue]="m._id">{{m.move}}</option>
+          <option *ngFor="let m of playService.objPlay.moves" [ngValue]="m._id">{{m.move}}</option>
       </select>
     </div>
   </div>
   <div class="row">
     <div class="col s6 offset-s3">
-      <button class="btn waves-effect waves-light" type="submit" name="action" (click)="play();"  [disabled]="playService.moves.length == 0" >Ok
+      <button class="btn waves-effect waves-light" type="submit" name="action" (click)="play();"  [disabled]="playService.objPlay.moves.length == 0" >Ok
           <i class="material-icons right">send</i>
         </button>
     </div>

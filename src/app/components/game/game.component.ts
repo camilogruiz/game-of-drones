@@ -16,7 +16,7 @@ export class GameComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.playService.currentUser = null;
+    this.playService.objPlay.currentUser = null;
     this.playService.count = 1;
   }
 
