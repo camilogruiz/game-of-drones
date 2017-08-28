@@ -15,7 +15,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let round of lstRounds">
-            <td>{{round._id}}</td>
+            <td>{{round._id  === null ? 'tie' : round._id}}</td>
             <td>{{round.total}}</td>
           </tr>
         </tbody>
