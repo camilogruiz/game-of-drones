@@ -20,3 +20,7 @@ npm install
 ```bash
 npm start
 ```
+
+```bash
+http://localhost:8889/
+```
