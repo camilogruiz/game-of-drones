@@ -4,7 +4,17 @@ Paper, rock and scissors... and more!
 
 ## Collection and References
 
-|users|games|rounds|moves|
+Name                  | Description
+----------------------|-----------------------------------------------------------------------------
+users                 | Collection players
+----------------------|-----------------------------------------------------------------------------
+moves                 | Collection moves, default data: (paper, rock, scissors)
+----------------------|-----------------------------------------------------------------------------
+games                 | Collection games reference to players
+----------------------|-----------------------------------------------------------------------------
+rounds                | Collection rounds
+
+
 
 ## Run app
 
@@ -18,6 +28,5 @@ npm install
 npm start
 ```
 
-```bash
-http://localhost:8889/
-```
+localhost:8889 [here][1].
+[1]: https://help.github.com/articles/using-pull-requests/
