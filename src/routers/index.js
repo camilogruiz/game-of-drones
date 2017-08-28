@@ -30,7 +30,6 @@ router.get('/about', function (req, res) {
 
 /**
  * API
- * USERS
  */
 
 /**
